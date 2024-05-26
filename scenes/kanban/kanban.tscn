@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cfnsbl1hejnxa"]
 
-[ext_resource type="PackedScene" uid="uid://eb4juwgbt8xy" path="res://scenes/kanban_column.tscn" id="1_fffyf"]
+[ext_resource type="PackedScene" uid="uid://eb4juwgbt8xy" path="res://scenes/kanban/kanban_column.tscn" id="1_fffyf"]
 
 [node name="Kanban" type="MarginContainer"]
 anchors_preset = 15

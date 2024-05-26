@@ -5,15 +5,17 @@ class_name Document
 	get:
 		return title
 	set(new_title):
+		if title != new_title:
+			unsaved_changes = true
 		title = new_title
-		unsaved_changes = true
 
 @export var body:String = "":
 	get:
 		return body
 	set(new_body):
+		if body != new_body:
+			unsaved_changes = true
 		body = new_body
-		unsaved_changes = true
 
 @export var children:Array[Document] = []
 
@@ -36,4 +38,5 @@ static func from_dict(dict:Dictionary):
 	document.body = dict["body"]
 	for child in dict["children"]:
 		document.children.append(Document.from_dict(child))
+	document.unsaved_changes = false
 	return document

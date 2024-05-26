@@ -60,13 +60,10 @@ func _update_document_heirarchy(item:TreeItem):
 		_update_document_heirarchy(child)
 	project_editor.changes = true
 
-
-func set_project(project:Project):
+func set_root(document:Document):
 	clear()
-	add_document(project.document_tree)
-		
+	add_document(document)
 	set_selected(get_root(), 0)
-
 
 func add_document(document:Document, parent:TreeItem=null, reparent:bool=false) -> TreeItem:
 	var new_item:TreeItem = create_item(parent)

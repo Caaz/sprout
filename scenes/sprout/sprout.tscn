@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cfdjs6j10cq3g"]
 
-[ext_resource type="Script" path="res://scenes/sprout.gd" id="1_qoh3e"]
+[ext_resource type="Script" path="res://scenes/sprout/sprout.gd" id="1_qoh3e"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mdvey"]
 draw_center = false

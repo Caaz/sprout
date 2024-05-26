@@ -11,12 +11,13 @@ signal saved
 
 @export var document_tree:Document = Document.new()
 
-func has_unsaved_changes(document:Document):
+func has_unsaved_changes(document:Document = document_tree):
 	if document.unsaved_changes:
+		print("Found unsaved changes on ", document.title)
 		return true
 	
 	for child in document.children:
-		if has_unsaved_changes(document):
+		if has_unsaved_changes(child):
 			return true
 	
 	return false

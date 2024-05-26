@@ -1,7 +1,7 @@
 extends MarginContainer
 
 
-const ProjectScene = preload("res://scenes/project_editor.tscn")
+const ProjectScene = preload("res://scenes/project_editor/project_editor.tscn")
 
 @onready var sprout_save:SproutSave
 @onready var project_list:ItemList = find_child("ProjectList")

@@ -1,14 +1,14 @@
 [gd_scene load_steps=10 format=3 uid="uid://crb0djmbprxj0"]
 
-[ext_resource type="Script" path="res://scenes/project_editor.gd" id="1_r1cxq"]
-[ext_resource type="Texture2D" uid="uid://dwy2ufq847nvh" path="res://addons/google_material/save_20dp_FILL0_wght400_GRAD0_opsz20.svg" id="2_6wk0y"]
-[ext_resource type="Texture2D" uid="uid://bcyktk5ojpq3r" path="res://addons/google_material/save_20dp_FILL1_wght400_GRAD0_opsz20.svg" id="3_uj8r4"]
-[ext_resource type="Texture2D" uid="uid://dy5m0uxihx66i" path="res://addons/google_material/note_add_20dp_FILL0_wght400_GRAD0_opsz20.svg" id="4_a27fh"]
-[ext_resource type="Texture2D" uid="uid://dmw6w8ya13r6l" path="res://addons/google_material/note_add_20dp_FILL1_wght400_GRAD0_opsz20.svg" id="5_bsfvw"]
-[ext_resource type="Texture2D" uid="uid://0nohl8avyhh2" path="res://addons/google_material/preview_off_20dp_FILL1_wght400_GRAD0_opsz20.svg" id="6_by2yo"]
-[ext_resource type="Texture2D" uid="uid://bweohugs135we" path="res://addons/google_material/preview_20dp_FILL1_wght400_GRAD0_opsz20.svg" id="7_4jtvb"]
-[ext_resource type="Script" path="res://nodes/DocumentTree.gd" id="8_yepom"]
-[ext_resource type="PackedScene" uid="uid://dry4sqxc5yx31" path="res://scenes/document_editor.tscn" id="9_iukvl"]
+[ext_resource type="Script" path="res://scenes/project_editor/project_editor.gd" id="1_fgrps"]
+[ext_resource type="Texture2D" uid="uid://dwy2ufq847nvh" path="res://addons/google_material/save_20dp_FILL0_wght400_GRAD0_opsz20.svg" id="2_0gqtb"]
+[ext_resource type="Texture2D" uid="uid://bcyktk5ojpq3r" path="res://addons/google_material/save_20dp_FILL1_wght400_GRAD0_opsz20.svg" id="3_4143d"]
+[ext_resource type="Texture2D" uid="uid://dy5m0uxihx66i" path="res://addons/google_material/note_add_20dp_FILL0_wght400_GRAD0_opsz20.svg" id="4_b78dl"]
+[ext_resource type="Texture2D" uid="uid://dmw6w8ya13r6l" path="res://addons/google_material/note_add_20dp_FILL1_wght400_GRAD0_opsz20.svg" id="5_fbllm"]
+[ext_resource type="Texture2D" uid="uid://0nohl8avyhh2" path="res://addons/google_material/preview_off_20dp_FILL1_wght400_GRAD0_opsz20.svg" id="6_xajvs"]
+[ext_resource type="Texture2D" uid="uid://bweohugs135we" path="res://addons/google_material/preview_20dp_FILL1_wght400_GRAD0_opsz20.svg" id="7_8qucw"]
+[ext_resource type="Script" path="res://scenes/document_editor/document_tree.gd" id="8_4umkm"]
+[ext_resource type="PackedScene" uid="uid://dry4sqxc5yx31" path="res://scenes/document_editor/document_editor.tscn" id="9_6m8co"]
 
 [node name="ProjectEditor" type="HSplitContainer"]
 anchors_preset = 15
@@ -17,7 +17,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 split_offset = 300
-script = ExtResource("1_r1cxq")
+script = ExtResource("1_fgrps")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -34,17 +34,17 @@ layout_mode = 2
 layout_mode = 2
 tooltip_text = "Save"
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource("2_6wk0y")
-texture_pressed = ExtResource("3_uj8r4")
-texture_hover = ExtResource("3_uj8r4")
+texture_normal = ExtResource("2_0gqtb")
+texture_pressed = ExtResource("3_4143d")
+texture_hover = ExtResource("3_4143d")
 
 [node name="AddDocumentButton" type="TextureButton" parent="MarginContainer/SideContainer/Toolbar"]
 layout_mode = 2
 tooltip_text = "Save"
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource("4_a27fh")
-texture_pressed = ExtResource("5_bsfvw")
-texture_hover = ExtResource("5_bsfvw")
+texture_normal = ExtResource("4_b78dl")
+texture_pressed = ExtResource("5_fbllm")
+texture_hover = ExtResource("5_fbllm")
 
 [node name="Separator" type="Panel" parent="MarginContainer/SideContainer/Toolbar"]
 layout_mode = 2
@@ -56,17 +56,17 @@ layout_mode = 2
 tooltip_text = "Toggle Preview"
 mouse_default_cursor_shape = 2
 toggle_mode = true
-texture_normal = ExtResource("6_by2yo")
-texture_pressed = ExtResource("7_4jtvb")
+texture_normal = ExtResource("6_xajvs")
+texture_pressed = ExtResource("7_8qucw")
 
 [node name="DocumentTree" type="Tree" parent="MarginContainer/SideContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 2
-script = ExtResource("8_yepom")
+script = ExtResource("8_4umkm")
 
-[node name="DocumentEditor" parent="." instance=ExtResource("9_iukvl")]
+[node name="DocumentEditor" parent="." instance=ExtResource("9_6m8co")]
 layout_mode = 2
 
 [connection signal="pressed" from="MarginContainer/SideContainer/Toolbar/SaveButton" to="." method="save"]
