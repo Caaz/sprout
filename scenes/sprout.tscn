@@ -96,8 +96,9 @@ file_mode = 0
 access = 2
 filters = PackedStringArray("*.json")
 
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/NewProjectButton" to="." method="_on_new_project_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/ImportProjectButton" to="." method="_on_import_project_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/DeleteProjectButton" to="." method="_on_delete_project_button_pressed"]
 [connection signal="item_activated" from="HBoxContainer/ScrollContainer/ProjectList" to="." method="_on_item_activated"]
-[connection signal="file_selected" from="NewProjectDialog" to="." method="_on_new_project_dialog_file_selected"]
-[connection signal="file_selected" from="ImportProjectDialog" to="." method="_on_import_project_dialog_file_selected"]
+[connection signal="file_selected" from="NewProjectDialog" to="." method="_on_dialog_file_selected"]
+[connection signal="file_selected" from="ImportProjectDialog" to="." method="_on_dialog_file_selected"]

@@ -1,11 +1,30 @@
 extends Resource
 class_name Project
 
+signal saved
+
 @export var name:String:
 	get:
 		return document_tree.title
-			
+	set(new_name):
+		document_tree.title = new_name
+
 @export var document_tree:Document = Document.new()
+
+func has_unsaved_changes(document:Document):
+	if document.unsaved_changes:
+		return true
+	
+	for child in document.children:
+		if has_unsaved_changes(document):
+			return true
+	
+	return false
+	
+func clear_unsaved_changes(document:Document):
+	document.unsaved_changes = false
+	for child in document.children:
+		clear_unsaved_changes(child)
 
 func to_dict():
 	return {
@@ -17,8 +36,8 @@ func save(path:String):
 	var stringify = JSON.stringify(to_dict())
 	var file = FileAccess.open(path, FileAccess.WRITE)
 	file.store_string(stringify)
-	print(path)
-	print("saving ",stringify)
+	clear_unsaved_changes(document_tree)
+	saved.emit()
 
 static func from_dict(dict:Dictionary):
 	var project = Project.new()

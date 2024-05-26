@@ -1,0 +1,96 @@
+[gd_scene load_steps=15 format=3 uid="uid://dry4sqxc5yx31"]
+
+[ext_resource type="Script" path="res://scenes/document_editor.gd" id="1_h5kvt"]
+[ext_resource type="Script" path="res://addons/markdownlabel/markdownlabel.gd" id="2_xxbm0"]
+[ext_resource type="Script" path="res://addons/markdownlabel/header_formats/h1_format.gd" id="3_2xct0"]
+[ext_resource type="Script" path="res://addons/markdownlabel/header_formats/h2_format.gd" id="4_dp2ay"]
+[ext_resource type="Script" path="res://addons/markdownlabel/header_formats/h3_format.gd" id="5_1c3nk"]
+[ext_resource type="Script" path="res://addons/markdownlabel/header_formats/h4_format.gd" id="6_5p1c4"]
+[ext_resource type="Script" path="res://addons/markdownlabel/header_formats/h5_format.gd" id="7_cxj3a"]
+[ext_resource type="Script" path="res://addons/markdownlabel/header_formats/h6_format.gd" id="8_setyn"]
+
+[sub_resource type="Resource" id="Resource_0rxxo"]
+resource_local_to_scene = true
+script = ExtResource("3_2xct0")
+font_size = 2.285
+is_bold = false
+is_italic = false
+is_underlined = false
+
+[sub_resource type="Resource" id="Resource_68ajp"]
+resource_local_to_scene = true
+script = ExtResource("4_dp2ay")
+font_size = 1.714
+is_bold = false
+is_italic = false
+is_underlined = false
+
+[sub_resource type="Resource" id="Resource_45xp6"]
+resource_local_to_scene = true
+script = ExtResource("5_1c3nk")
+font_size = 1.428
+is_bold = false
+is_italic = false
+is_underlined = false
+
+[sub_resource type="Resource" id="Resource_wwbm0"]
+resource_local_to_scene = true
+script = ExtResource("6_5p1c4")
+font_size = 1.142
+is_bold = false
+is_italic = false
+is_underlined = false
+
+[sub_resource type="Resource" id="Resource_nsg08"]
+resource_local_to_scene = true
+script = ExtResource("7_cxj3a")
+font_size = 1.0
+is_bold = false
+is_italic = false
+is_underlined = false
+
+[sub_resource type="Resource" id="Resource_usdwo"]
+resource_local_to_scene = true
+script = ExtResource("8_setyn")
+font_size = 0.857
+is_bold = false
+is_italic = false
+is_underlined = false
+
+[node name="DocumentEditor" type="SplitContainer"]
+split_offset = 370
+script = ExtResource("1_h5kvt")
+
+[node name="Editor" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Editor"]
+layout_mode = 2
+
+[node name="TitleInput" type="LineEdit" parent="Editor/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarkdownInput" type="CodeEdit" parent="Editor/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+wrap_mode = 1
+gutters_draw_line_numbers = true
+
+[node name="Preview" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="MarkdownOutput" type="RichTextLabel" parent="Preview"]
+layout_mode = 2
+bbcode_enabled = true
+script = ExtResource("2_xxbm0")
+h1 = SubResource("Resource_0rxxo")
+h2 = SubResource("Resource_68ajp")
+h3 = SubResource("Resource_45xp6")
+h4 = SubResource("Resource_wwbm0")
+h5 = SubResource("Resource_nsg08")
+h6 = SubResource("Resource_usdwo")
+
+[connection signal="text_changed" from="Editor/VBoxContainer/TitleInput" to="." method="_on_title_input_changed"]
+[connection signal="text_changed" from="Editor/VBoxContainer/MarkdownInput" to="." method="_on_body_input_changed"]
+[connection signal="text_set" from="Editor/VBoxContainer/MarkdownInput" to="." method="_on_body_input_changed"]

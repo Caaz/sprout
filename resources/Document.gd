@@ -1,10 +1,23 @@
 extends Resource
 class_name Document
 
-@export var title:String = "Untitled Document"
-@export var body:String = ""
+@export var title:String = "Untitled Document":
+	get:
+		return title
+	set(new_title):
+		title = new_title
+		unsaved_changes = true
+
+@export var body:String = "":
+	get:
+		return body
+	set(new_body):
+		body = new_body
+		unsaved_changes = true
+
 @export var children:Array[Document] = []
 
+var unsaved_changes = false
 
 func to_dict():
 	var children_array = []
