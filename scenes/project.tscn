@@ -1,0 +1,164 @@
+[gd_scene load_steps=23 format=3 uid="uid://crb0djmbprxj0"]
+
+[ext_resource type="Script" path="res://scenes/project.gd" id="1_7e8uo"]
+[ext_resource type="Script" path="res://addons/markdownlabel/markdownlabel.gd" id="1_ckyy1"]
+[ext_resource type="Script" path="res://addons/markdownlabel/header_formats/h1_format.gd" id="2_bc3ur"]
+[ext_resource type="Texture2D" uid="uid://dy5m0uxihx66i" path="res://addons/google_material/note_add_20dp_FILL0_wght400_GRAD0_opsz20.svg" id="2_s8b7u"]
+[ext_resource type="Texture2D" uid="uid://dwy2ufq847nvh" path="res://addons/google_material/save_20dp_FILL0_wght400_GRAD0_opsz20.svg" id="2_uj3vs"]
+[ext_resource type="Texture2D" uid="uid://bcyktk5ojpq3r" path="res://addons/google_material/save_20dp_FILL1_wght400_GRAD0_opsz20.svg" id="3_4h8ys"]
+[ext_resource type="Script" path="res://addons/markdownlabel/header_formats/h2_format.gd" id="3_8t7rr"]
+[ext_resource type="Texture2D" uid="uid://dmw6w8ya13r6l" path="res://addons/google_material/note_add_20dp_FILL1_wght400_GRAD0_opsz20.svg" id="3_bbgom"]
+[ext_resource type="Texture2D" uid="uid://0nohl8avyhh2" path="res://addons/google_material/preview_off_20dp_FILL1_wght400_GRAD0_opsz20.svg" id="4_ru6gi"]
+[ext_resource type="Script" path="res://addons/markdownlabel/header_formats/h3_format.gd" id="4_yu0e0"]
+[ext_resource type="Script" path="res://addons/markdownlabel/header_formats/h4_format.gd" id="5_becmy"]
+[ext_resource type="Texture2D" uid="uid://bweohugs135we" path="res://addons/google_material/preview_20dp_FILL1_wght400_GRAD0_opsz20.svg" id="5_failb"]
+[ext_resource type="Script" path="res://addons/markdownlabel/header_formats/h5_format.gd" id="6_hfque"]
+[ext_resource type="Script" path="res://nodes/DocumentTree.gd" id="7_scm8v"]
+[ext_resource type="Script" path="res://addons/markdownlabel/header_formats/h6_format.gd" id="7_t7fu4"]
+[ext_resource type="Script" path="res://nodes/AdaptiveSplitContainer.gd" id="8_slveo"]
+
+[sub_resource type="Resource" id="Resource_0rxxo"]
+resource_local_to_scene = true
+script = ExtResource("2_bc3ur")
+font_size = 2.285
+is_bold = false
+is_italic = false
+is_underlined = false
+
+[sub_resource type="Resource" id="Resource_68ajp"]
+resource_local_to_scene = true
+script = ExtResource("3_8t7rr")
+font_size = 1.714
+is_bold = false
+is_italic = false
+is_underlined = false
+
+[sub_resource type="Resource" id="Resource_45xp6"]
+resource_local_to_scene = true
+script = ExtResource("4_yu0e0")
+font_size = 1.428
+is_bold = false
+is_italic = false
+is_underlined = false
+
+[sub_resource type="Resource" id="Resource_wwbm0"]
+resource_local_to_scene = true
+script = ExtResource("5_becmy")
+font_size = 1.142
+is_bold = false
+is_italic = false
+is_underlined = false
+
+[sub_resource type="Resource" id="Resource_nsg08"]
+resource_local_to_scene = true
+script = ExtResource("6_hfque")
+font_size = 1.0
+is_bold = false
+is_italic = false
+is_underlined = false
+
+[sub_resource type="Resource" id="Resource_usdwo"]
+resource_local_to_scene = true
+script = ExtResource("7_t7fu4")
+font_size = 0.857
+is_bold = false
+is_italic = false
+is_underlined = false
+
+[node name="ProjectEditor" type="HSplitContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 300
+script = ExtResource("1_7e8uo")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="SideContainer" type="BoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+vertical = true
+
+[node name="Toolbar" type="BoxContainer" parent="MarginContainer/SideContainer"]
+layout_mode = 2
+
+[node name="SaveButton" type="TextureButton" parent="MarginContainer/SideContainer/Toolbar"]
+layout_mode = 2
+tooltip_text = "Save"
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("2_uj3vs")
+texture_pressed = ExtResource("3_4h8ys")
+texture_hover = ExtResource("3_4h8ys")
+
+[node name="AddDocumentButton" type="TextureButton" parent="MarginContainer/SideContainer/Toolbar"]
+layout_mode = 2
+tooltip_text = "Save"
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("2_s8b7u")
+texture_pressed = ExtResource("3_bbgom")
+texture_hover = ExtResource("3_bbgom")
+
+[node name="Separator" type="Panel" parent="MarginContainer/SideContainer/Toolbar"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 3
+
+[node name="PreviewToggle" type="TextureButton" parent="MarginContainer/SideContainer/Toolbar"]
+layout_mode = 2
+tooltip_text = "Toggle Preview"
+mouse_default_cursor_shape = 2
+toggle_mode = true
+texture_normal = ExtResource("4_ru6gi")
+texture_pressed = ExtResource("5_failb")
+
+[node name="DocumentTree" type="Tree" parent="MarginContainer/SideContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+script = ExtResource("7_scm8v")
+
+[node name="DocumentContainer" type="SplitContainer" parent="."]
+layout_mode = 2
+split_offset = 370
+script = ExtResource("8_slveo")
+
+[node name="Editor" type="MarginContainer" parent="DocumentContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DocumentContainer/Editor"]
+layout_mode = 2
+
+[node name="TitleInput" type="LineEdit" parent="DocumentContainer/Editor/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarkdownInput" type="CodeEdit" parent="DocumentContainer/Editor/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+wrap_mode = 1
+gutters_draw_line_numbers = true
+
+[node name="Preview" type="MarginContainer" parent="DocumentContainer"]
+visible = false
+layout_mode = 2
+
+[node name="MarkdownOutput" type="RichTextLabel" parent="DocumentContainer/Preview"]
+layout_mode = 2
+bbcode_enabled = true
+script = ExtResource("1_ckyy1")
+h1 = SubResource("Resource_0rxxo")
+h2 = SubResource("Resource_68ajp")
+h3 = SubResource("Resource_45xp6")
+h4 = SubResource("Resource_wwbm0")
+h5 = SubResource("Resource_nsg08")
+h6 = SubResource("Resource_usdwo")
+
+[connection signal="pressed" from="MarginContainer/SideContainer/Toolbar/SaveButton" to="." method="save"]
+[connection signal="pressed" from="MarginContainer/SideContainer/Toolbar/AddDocumentButton" to="." method="_on_add_document_button_pressed"]
+[connection signal="toggled" from="MarginContainer/SideContainer/Toolbar/PreviewToggle" to="." method="_on_preview_toggle_toggled"]
+[connection signal="item_selected" from="MarginContainer/SideContainer/DocumentTree" to="." method="_set_editor_contents"]
+[connection signal="text_changed" from="DocumentContainer/Editor/VBoxContainer/TitleInput" to="." method="_set_title"]
+[connection signal="text_changed" from="DocumentContainer/Editor/VBoxContainer/MarkdownInput" to="." method="_set_body"]

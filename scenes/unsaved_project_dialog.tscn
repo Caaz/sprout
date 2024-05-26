@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=3 uid="uid://dposxrrue2em8"]
+
+[ext_resource type="Script" path="res://scenes/UnsavedProjectDialog.gd" id="1_tjskn"]
+
+[node name="UnsavedProjectDialog" type="Window"]
+initial_position = 4
+size = Vector2i(500, 100)
+transient = true
+exclusive = true
+popup_window = true
+script = ExtResource("1_tjskn")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BoxContainer2" type="BoxContainer" parent="MarginContainer"]
+layout_mode = 2
+vertical = true
+
+[node name="Body" type="Label" parent="MarginContainer/BoxContainer2"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_vertical = 2
+text = "Project \"Whatever\" has unsaved changes."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="BoxContainer" type="HFlowContainer" parent="MarginContainer/BoxContainer2"]
+layout_mode = 2
+alignment = 1
+
+[node name="CloseAnywayButton" type="Button" parent="MarginContainer/BoxContainer2/BoxContainer"]
+layout_mode = 2
+text = "Close Anyway"
+
+[node name="SaveAndCloseButton" type="Button" parent="MarginContainer/BoxContainer2/BoxContainer"]
+layout_mode = 2
+text = "Save And Close"
+
+[node name="CancelButton" type="Button" parent="MarginContainer/BoxContainer2/BoxContainer"]
+layout_mode = 2
+text = "Cancel"
+
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]
+[connection signal="pressed" from="MarginContainer/BoxContainer2/BoxContainer/CloseAnywayButton" to="." method="_on_close_anyway_button_pressed"]
+[connection signal="pressed" from="MarginContainer/BoxContainer2/BoxContainer/SaveAndCloseButton" to="." method="_on_save_and_close_button_pressed"]
+[connection signal="pressed" from="MarginContainer/BoxContainer2/BoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]
