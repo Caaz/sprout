@@ -38,3 +38,9 @@ func _on_preview_toggle_toggled(toggled_on):
 func save():
 	project.save(project_location)
 	sprout.save()
+	document_tree.clear_changes()
+	find_parent("Main").add_notification("Saved!")
+
+
+func _on_document_tree_root_changed(document):
+	name = document.title

@@ -73,3 +73,5 @@ layout_mode = 2
 [connection signal="pressed" from="MarginContainer/SideContainer/Toolbar/AddDocumentButton" to="." method="_on_add_document_button_pressed"]
 [connection signal="toggled" from="MarginContainer/SideContainer/Toolbar/PreviewToggle" to="." method="_on_preview_toggle_toggled"]
 [connection signal="item_selected" from="MarginContainer/SideContainer/DocumentTree" to="." method="_set_editor_contents"]
+[connection signal="root_changed" from="MarginContainer/SideContainer/DocumentTree" to="." method="_on_document_tree_root_changed"]
+[connection signal="document_changed" from="DocumentEditor" to="MarginContainer/SideContainer/DocumentTree" method="_on_document_changed"]

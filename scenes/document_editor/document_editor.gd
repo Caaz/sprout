@@ -1,6 +1,7 @@
 extends SplitContainer
 class_name DocumentEditor
 
+signal document_changed(document)
 var active_document:Document
 @onready var body_input = find_child("MarkdownInput")
 @onready var title_input = find_child("TitleInput")
@@ -16,7 +17,10 @@ func _ready():
 	)
 
 func set_document(document:Document):
+	if active_document:
+		active_document.changed.disconnect(_on_document_changed)
 	active_document = document
+	active_document.changed.connect(_on_document_changed)
 	visible = document != null
 	if document:
 		title_input.text = document.title
@@ -25,12 +29,11 @@ func set_document(document:Document):
 func _on_body_input_changed():
 	if active_document:
 		active_document.body = body_input.text
-		_update_preview()
 
 func _on_title_input_changed(new_text):
 	if active_document:
-		active_document.title = title_input.text
-		_update_preview()
+		active_document.title = new_text
 
-func _update_preview():
-	preview.markdown_text = "#%s\n%s" % [title_input.text, body_input.text]
+func _on_document_changed():
+	preview.markdown_text = "#%s\n%s" % [active_document.title, active_document.body]
+	document_changed.emit(active_document)

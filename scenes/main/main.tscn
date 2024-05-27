@@ -1,9 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://cpmrokc46figq"]
+[gd_scene load_steps=4 format=3 uid="uid://cpmrokc46figq"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_w78hf"]
 [ext_resource type="PackedScene" uid="uid://cfdjs6j10cq3g" path="res://scenes/sprout/sprout.tscn" id="2_5ogd5"]
+[ext_resource type="Script" path="res://scenes/main/tab_container.gd" id="2_uilb0"]
 
-[node name="TabContainer" type="TabContainer"]
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_w78hf")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -12,10 +25,26 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 drag_to_rearrange_enabled = true
-script = ExtResource("1_w78hf")
+script = ExtResource("2_uilb0")
 
-[node name="Sprout" parent="." instance=ExtResource("2_5ogd5")]
+[node name="Sprout" parent="TabContainer" instance=ExtResource("2_5ogd5")]
 layout_mode = 2
 
-[connection signal="tab_button_pressed" from="." to="." method="_on_tab_button_pressed"]
-[connection signal="tab_changed" from="." to="." method="_on_tab_changed"]
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -16.0
+offset_top = -191.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="NotificationController" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 2
+
+[connection signal="tab_button_pressed" from="TabContainer" to="TabContainer" method="_on_tab_button_pressed"]
+[connection signal="tab_changed" from="TabContainer" to="TabContainer" method="_on_tab_changed"]

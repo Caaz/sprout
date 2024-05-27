@@ -5,22 +5,28 @@ class_name Document
 	get:
 		return title
 	set(new_title):
-		if title != new_title:
-			unsaved_changes = true
 		title = new_title
+		emit_changed()
 
 @export var body:String = "":
 	get:
 		return body
 	set(new_body):
-		if body != new_body:
-			unsaved_changes = true
 		body = new_body
+		emit_changed()
 
 @export var children:Array[Document] = []
 
-var unsaved_changes = false
+var _initial_title:String
+var _initial_body:String
 
+func has_changes():
+	return _initial_title != title or _initial_body != body
+
+func set_initial_values():
+	_initial_title = title
+	_initial_body = body
+	
 func to_dict():
 	var children_array = []
 	for child in children:
@@ -36,7 +42,8 @@ static func from_dict(dict:Dictionary):
 	var document = Document.new()
 	document.title = dict["title"]
 	document.body = dict["body"]
+	document.set_initial_values()
+	
 	for child in dict["children"]:
 		document.children.append(Document.from_dict(child))
-	document.unsaved_changes = false
 	return document

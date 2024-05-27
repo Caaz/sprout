@@ -11,19 +11,16 @@ signal saved
 
 @export var document_tree:Document = Document.new()
 
-func has_unsaved_changes(document:Document = document_tree):
-	if document.unsaved_changes:
-		print("Found unsaved changes on ", document.title)
+func has_unsaved_changes(document:Document = document_tree)-> bool:
+	if document.has_changes():
 		return true
-	
 	for child in document.children:
 		if has_unsaved_changes(child):
 			return true
-	
 	return false
 	
 func clear_unsaved_changes(document:Document):
-	document.unsaved_changes = false
+	document.set_initial_values()
 	for child in document.children:
 		clear_unsaved_changes(child)
 
