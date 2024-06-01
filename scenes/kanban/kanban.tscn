@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cfnsbl1hejnxa"]
+[gd_scene load_steps=3 format=3 uid="uid://cfnsbl1hejnxa"]
 
 [ext_resource type="PackedScene" uid="uid://eb4juwgbt8xy" path="res://scenes/kanban/kanban_column.tscn" id="1_fffyf"]
+[ext_resource type="Texture2D" uid="uid://bsrogavsdstck" path="res://addons/google_material/splitscreen_vertical_add_20dp_FILL0_wght400_GRAD0_opsz20.svg" id="2_4l281"]
 
 [node name="Kanban" type="MarginContainer"]
 anchors_preset = 15
@@ -9,23 +10,26 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2
+theme_type_variation = &"PanelContainerDark"
 
-[node name="BoxContainer" type="BoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="Button" type="Button" parent="VBoxContainer/BoxContainer"]
-layout_mode = 2
-text = "Add Task"
-
-[node name="Button2" type="Button" parent="VBoxContainer/BoxContainer"]
-layout_mode = 2
-text = "Add Column"
-
-[node name="Board" type="FlowContainer" parent="VBoxContainer"]
+[node name="Board" type="HBoxContainer" parent="PanelContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="KanbanColumn" parent="VBoxContainer/Board" instance=ExtResource("1_fffyf")]
+[node name="KanbanColumn" parent="PanelContainer/Board" instance=ExtResource("1_fffyf")]
 layout_mode = 2
+
+[node name="KanbanColumn2" parent="PanelContainer/Board" instance=ExtResource("1_fffyf")]
+layout_mode = 2
+
+[node name="KanbanColumn3" parent="PanelContainer/Board" instance=ExtResource("1_fffyf")]
+layout_mode = 2
+
+[node name="TextureButton" type="Button" parent="PanelContainer/Board"]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+size_flags_stretch_ratio = 0.1
+icon = ExtResource("2_4l281")
+icon_alignment = 1

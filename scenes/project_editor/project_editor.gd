@@ -23,6 +23,8 @@ func _ready():
 	_set_editor_contents()
 	
 func _set_editor_contents():
+	var kanban_toggle:Button = find_child("KanbanToggle")
+	kanban_toggle.button_pressed = false
 	document_editor.set_document(document_tree.get_document())
 
 func _on_add_document_button_pressed():
@@ -35,6 +37,10 @@ func _on_add_document_button_pressed():
 func _on_preview_toggle_toggled(toggled_on):
 	find_child("Preview").visible = toggled_on
 
+func _on_kanban_toggle_toggled(toggled_on):
+	find_child("Kanban").visible = toggled_on
+	document_editor.visible = !toggled_on
+	
 func save():
 	project.save(project_location)
 	sprout.save()
@@ -44,3 +50,5 @@ func save():
 
 func _on_document_tree_root_changed(document):
 	name = document.title
+
+

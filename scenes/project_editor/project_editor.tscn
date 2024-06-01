@@ -1,14 +1,21 @@
-[gd_scene load_steps=10 format=3 uid="uid://crb0djmbprxj0"]
+[gd_scene load_steps=11 format=3 uid="uid://crb0djmbprxj0"]
 
 [ext_resource type="Script" path="res://scenes/project_editor/project_editor.gd" id="1_fgrps"]
 [ext_resource type="Texture2D" uid="uid://dwy2ufq847nvh" path="res://addons/google_material/save_20dp_FILL0_wght400_GRAD0_opsz20.svg" id="2_0gqtb"]
-[ext_resource type="Texture2D" uid="uid://bcyktk5ojpq3r" path="res://addons/google_material/save_20dp_FILL1_wght400_GRAD0_opsz20.svg" id="3_4143d"]
 [ext_resource type="Texture2D" uid="uid://dy5m0uxihx66i" path="res://addons/google_material/note_add_20dp_FILL0_wght400_GRAD0_opsz20.svg" id="4_b78dl"]
-[ext_resource type="Texture2D" uid="uid://dmw6w8ya13r6l" path="res://addons/google_material/note_add_20dp_FILL1_wght400_GRAD0_opsz20.svg" id="5_fbllm"]
-[ext_resource type="Texture2D" uid="uid://0nohl8avyhh2" path="res://addons/google_material/preview_off_20dp_FILL1_wght400_GRAD0_opsz20.svg" id="6_xajvs"]
 [ext_resource type="Texture2D" uid="uid://bweohugs135we" path="res://addons/google_material/preview_20dp_FILL1_wght400_GRAD0_opsz20.svg" id="7_8qucw"]
 [ext_resource type="Script" path="res://scenes/document_editor/document_tree.gd" id="8_4umkm"]
+[ext_resource type="Texture2D" uid="uid://7xqpfnaqhbfs" path="res://addons/google_material/view_kanban_20dp_FILL0_wght400_GRAD0_opsz20.svg" id="8_ty8rn"]
 [ext_resource type="PackedScene" uid="uid://dry4sqxc5yx31" path="res://scenes/document_editor/document_editor.tscn" id="9_6m8co"]
+[ext_resource type="PackedScene" uid="uid://cfnsbl1hejnxa" path="res://scenes/kanban/kanban.tscn" id="12_jcnoi"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_5q50n"]
+device = -1
+ctrl_pressed = true
+keycode = 83
+
+[sub_resource type="Shortcut" id="Shortcut_bskgf"]
+events = [SubResource("InputEventKey_5q50n")]
 
 [node name="ProjectEditor" type="HSplitContainer"]
 anchors_preset = 15
@@ -30,34 +37,37 @@ vertical = true
 [node name="Toolbar" type="BoxContainer" parent="MarginContainer/SideContainer"]
 layout_mode = 2
 
-[node name="SaveButton" type="TextureButton" parent="MarginContainer/SideContainer/Toolbar"]
+[node name="SaveButton" type="Button" parent="MarginContainer/SideContainer/Toolbar"]
 layout_mode = 2
 tooltip_text = "Save"
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource("2_0gqtb")
-texture_pressed = ExtResource("3_4143d")
-texture_hover = ExtResource("3_4143d")
+shortcut = SubResource("Shortcut_bskgf")
+icon = ExtResource("2_0gqtb")
 
-[node name="AddDocumentButton" type="TextureButton" parent="MarginContainer/SideContainer/Toolbar"]
+[node name="AddDocumentButton" type="Button" parent="MarginContainer/SideContainer/Toolbar"]
 layout_mode = 2
-tooltip_text = "Save"
+tooltip_text = "Add Document"
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource("4_b78dl")
-texture_pressed = ExtResource("5_fbllm")
-texture_hover = ExtResource("5_fbllm")
+icon = ExtResource("4_b78dl")
 
 [node name="Separator" type="Panel" parent="MarginContainer/SideContainer/Toolbar"]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 3
 
-[node name="PreviewToggle" type="TextureButton" parent="MarginContainer/SideContainer/Toolbar"]
+[node name="PreviewToggle" type="Button" parent="MarginContainer/SideContainer/Toolbar"]
 layout_mode = 2
 tooltip_text = "Toggle Preview"
 mouse_default_cursor_shape = 2
 toggle_mode = true
-texture_normal = ExtResource("6_xajvs")
-texture_pressed = ExtResource("7_8qucw")
+icon = ExtResource("7_8qucw")
+
+[node name="KanbanToggle" type="Button" parent="MarginContainer/SideContainer/Toolbar"]
+layout_mode = 2
+tooltip_text = "Toggle Kanban"
+mouse_default_cursor_shape = 2
+toggle_mode = true
+icon = ExtResource("8_ty8rn")
 
 [node name="DocumentTree" type="Tree" parent="MarginContainer/SideContainer"]
 layout_mode = 2
@@ -67,11 +77,17 @@ columns = 2
 script = ExtResource("8_4umkm")
 
 [node name="DocumentEditor" parent="." instance=ExtResource("9_6m8co")]
+visible = false
+layout_mode = 2
+
+[node name="Kanban" parent="." instance=ExtResource("12_jcnoi")]
+visible = false
 layout_mode = 2
 
 [connection signal="pressed" from="MarginContainer/SideContainer/Toolbar/SaveButton" to="." method="save"]
 [connection signal="pressed" from="MarginContainer/SideContainer/Toolbar/AddDocumentButton" to="." method="_on_add_document_button_pressed"]
 [connection signal="toggled" from="MarginContainer/SideContainer/Toolbar/PreviewToggle" to="." method="_on_preview_toggle_toggled"]
+[connection signal="toggled" from="MarginContainer/SideContainer/Toolbar/KanbanToggle" to="." method="_on_kanban_toggle_toggled"]
 [connection signal="item_selected" from="MarginContainer/SideContainer/DocumentTree" to="." method="_set_editor_contents"]
 [connection signal="root_changed" from="MarginContainer/SideContainer/DocumentTree" to="." method="_on_document_tree_root_changed"]
 [connection signal="document_changed" from="DocumentEditor" to="MarginContainer/SideContainer/DocumentTree" method="_on_document_changed"]

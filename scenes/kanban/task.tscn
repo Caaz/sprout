@@ -1,6 +1,11 @@
 [gd_scene format=3 uid="uid://cs217vo7ql7yw"]
 
-[node name="Panel" type="PanelContainer"]
+[node name="PanelContainer" type="PanelContainer"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 43.0
+offset_bottom = 31.0
+theme_type_variation = &"Task"
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2

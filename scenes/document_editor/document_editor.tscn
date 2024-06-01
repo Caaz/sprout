@@ -69,6 +69,7 @@ layout_mode = 2
 
 [node name="TitleInput" type="LineEdit" parent="Editor/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 
 [node name="MarkdownInput" type="CodeEdit" parent="Editor/VBoxContainer"]
 layout_mode = 2

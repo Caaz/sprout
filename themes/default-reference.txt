@@ -1,0 +1,26 @@
+Backgrounds
+090909 : Back Background
+111111 : Disabled tab / PanelContainer
+161616 : Panel
+212121 : Button Normal / Task
+2b2b2b : Disabled Border
+
+Text
+CCC - For Reading
+999 - Tree
+
+Primary
+3eb842
+8fc05c - lighter
+
+Secondary
+a52828
+dc4237 - lighter
+
+
+
+
+
+
+
+

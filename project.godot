@@ -25,7 +25,7 @@ enabled=PackedStringArray("res://addons/markdownlabel/plugin.cfg")
 
 [gui]
 
-theme/custom="res://themes/minimal.tres"
+theme/custom="res://themes/default.tres"
 
 [rendering]
 

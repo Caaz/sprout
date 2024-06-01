@@ -1,75 +1,64 @@
-[gd_scene load_steps=14 format=3 uid="uid://eb4juwgbt8xy"]
+[gd_scene load_steps=5 format=3 uid="uid://eb4juwgbt8xy"]
 
-[ext_resource type="Script" path="res://addons/markdownlabel/markdownlabel.gd" id="1_x0iyj"]
-[ext_resource type="Script" path="res://addons/markdownlabel/header_formats/h1_format.gd" id="2_uca57"]
-[ext_resource type="Script" path="res://addons/markdownlabel/header_formats/h2_format.gd" id="3_aypi2"]
-[ext_resource type="Script" path="res://addons/markdownlabel/header_formats/h3_format.gd" id="4_lkxfm"]
-[ext_resource type="Script" path="res://addons/markdownlabel/header_formats/h4_format.gd" id="5_da0vg"]
-[ext_resource type="Script" path="res://addons/markdownlabel/header_formats/h5_format.gd" id="6_4cdvn"]
-[ext_resource type="Script" path="res://addons/markdownlabel/header_formats/h6_format.gd" id="7_mtp5n"]
+[ext_resource type="Script" path="res://scenes/kanban/kanban_column.gd" id="1_vwnu7"]
+[ext_resource type="Texture2D" uid="uid://blwb2q51rks62" path="res://addons/google_material/delete_20dp_FILL1_wght400_GRAD0_opsz20.svg" id="2_vekcb"]
+[ext_resource type="PackedScene" uid="uid://cs217vo7ql7yw" path="res://scenes/kanban/task.tscn" id="3_lufbr"]
+[ext_resource type="Texture2D" uid="uid://dc32ew4brst2r" path="res://addons/google_material/splitscreen_add_20dp_FILL0_wght400_GRAD0_opsz20.svg" id="4_itloi"]
 
-[sub_resource type="Resource" id="Resource_1omxl"]
-resource_local_to_scene = true
-script = ExtResource("2_uca57")
-font_size = 2.285
-is_bold = false
-is_italic = false
-is_underlined = false
+[node name="KanbanColumn" type="PanelContainer"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 1144.0
+offset_bottom = 640.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_type_variation = &"KanbanColumn"
+script = ExtResource("1_vwnu7")
+metadata/_edit_vertical_guides_ = [-111.0]
 
-[sub_resource type="Resource" id="Resource_3crho"]
-resource_local_to_scene = true
-script = ExtResource("3_aypi2")
-font_size = 1.714
-is_bold = false
-is_italic = false
-is_underlined = false
-
-[sub_resource type="Resource" id="Resource_rr1mf"]
-resource_local_to_scene = true
-script = ExtResource("4_lkxfm")
-font_size = 1.428
-is_bold = false
-is_italic = false
-is_underlined = false
-
-[sub_resource type="Resource" id="Resource_36b0s"]
-resource_local_to_scene = true
-script = ExtResource("5_da0vg")
-font_size = 1.142
-is_bold = false
-is_italic = false
-is_underlined = false
-
-[sub_resource type="Resource" id="Resource_hxhks"]
-resource_local_to_scene = true
-script = ExtResource("6_4cdvn")
-font_size = 1.0
-is_bold = false
-is_italic = false
-is_underlined = false
-
-[sub_resource type="Resource" id="Resource_qd8ly"]
-resource_local_to_scene = true
-script = ExtResource("7_mtp5n")
-font_size = 0.857
-is_bold = false
-is_italic = false
-is_underlined = false
-
-[node name="KanbanColumn" type="BoxContainer"]
+[node name="BoxContainer" type="BoxContainer" parent="."]
+layout_mode = 2
 size_flags_horizontal = 3
 vertical = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="KanbanColumnHeader" type="MarginContainer" parent="BoxContainer"]
 layout_mode = 2
-bbcode_enabled = true
-text = "[font_size=36]TODO[/font_size]"
-fit_content = true
-script = ExtResource("1_x0iyj")
-markdown_text = "#TODO"
-h1 = SubResource("Resource_1omxl")
-h2 = SubResource("Resource_3crho")
-h3 = SubResource("Resource_rr1mf")
-h4 = SubResource("Resource_36b0s")
-h5 = SubResource("Resource_hxhks")
-h6 = SubResource("Resource_qd8ly")
+
+[node name="FlowContainer" type="FlowContainer" parent="BoxContainer/KanbanColumnHeader"]
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="BoxContainer/KanbanColumnHeader/FlowContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "Test Test"
+expand_to_text_length = true
+
+[node name="DeleteButton" type="Button" parent="BoxContainer/KanbanColumnHeader/FlowContainer"]
+custom_minimum_size = Vector2(42, 0)
+layout_mode = 2
+icon = ExtResource("2_vekcb")
+icon_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="BoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="BoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BoxContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Panel" parent="BoxContainer/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("3_lufbr")]
+layout_mode = 2
+
+[node name="Panel2" parent="BoxContainer/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("3_lufbr")]
+layout_mode = 2
+
+[node name="TextureButton" type="Button" parent="BoxContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+icon = ExtResource("4_itloi")
+icon_alignment = 1
