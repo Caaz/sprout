@@ -33,7 +33,7 @@ func to_dict():
 	}
 
 func save(path:String):
-	var stringify = JSON.stringify(to_dict())
+	var stringify = JSON.stringify(to_dict(), "\t")
 	var file = FileAccess.open(path, FileAccess.WRITE)
 	file.store_string(stringify)
 	clear_unsaved_changes(document_tree)
