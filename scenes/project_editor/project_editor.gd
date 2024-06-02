@@ -8,6 +8,7 @@ var project_location:String
 @onready var document_preview = find_child("MarkdownOutput")
 @onready var sprout = get_parent().find_child("Sprout")
 @onready var document_editor = find_child("DocumentEditor")
+@onready var kanban_board = find_child("Kanban")
 
 func _ready():
 	if project_location and FileAccess.file_exists(project_location):
@@ -20,6 +21,7 @@ func _ready():
 	name = project.name
 	
 	document_tree.set_root(project.document_tree)
+	kanban_board.from_resource(project.kanban)
 	_set_editor_contents()
 	
 func _set_editor_contents():
@@ -35,13 +37,21 @@ func _on_add_document_button_pressed():
 		_set_editor_contents()
 
 func _on_preview_toggle_toggled(toggled_on):
-	find_child("Preview").visible = toggled_on
+	document_editor.toggle_preview()
+	if toggled_on:
+		find_child("KanbanToggle").button_pressed = !toggled_on
+
+func _on_editor_toggle_toggled(toggled_on):
+	find_child("Editor").visible = toggled_on
+	if toggled_on:
+		find_child("KanbanToggle").button_pressed = !toggled_on
 
 func _on_kanban_toggle_toggled(toggled_on):
 	find_child("Kanban").visible = toggled_on
 	document_editor.visible = !toggled_on
 	
 func save():
+	project.kanban = kanban_board.to_resource()
 	project.save(project_location)
 	sprout.save()
 	document_tree.clear_changes()
@@ -50,5 +60,4 @@ func save():
 
 func _on_document_tree_root_changed(document):
 	name = document.title
-
 

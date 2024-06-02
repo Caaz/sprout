@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://eb4juwgbt8xy"]
+[gd_scene load_steps=4 format=3 uid="uid://eb4juwgbt8xy"]
 
 [ext_resource type="Script" path="res://scenes/kanban/kanban_column.gd" id="1_vwnu7"]
 [ext_resource type="Texture2D" uid="uid://blwb2q51rks62" path="res://addons/google_material/delete_20dp_FILL1_wght400_GRAD0_opsz20.svg" id="2_vekcb"]
-[ext_resource type="PackedScene" uid="uid://cs217vo7ql7yw" path="res://scenes/kanban/task.tscn" id="3_lufbr"]
 [ext_resource type="Texture2D" uid="uid://dc32ew4brst2r" path="res://addons/google_material/splitscreen_add_20dp_FILL0_wght400_GRAD0_opsz20.svg" id="4_itloi"]
 
 [node name="KanbanColumn" type="PanelContainer"]
@@ -27,7 +26,7 @@ layout_mode = 2
 [node name="FlowContainer" type="FlowContainer" parent="BoxContainer/KanbanColumnHeader"]
 layout_mode = 2
 
-[node name="LineEdit" type="LineEdit" parent="BoxContainer/KanbanColumnHeader/FlowContainer"]
+[node name="Name" type="LineEdit" parent="BoxContainer/KanbanColumnHeader/FlowContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 24
@@ -47,18 +46,19 @@ size_flags_vertical = 3
 [node name="MarginContainer" type="MarginContainer" parent="BoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="BoxContainer/ScrollContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="Panel" parent="BoxContainer/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("3_lufbr")]
+[node name="TaskContainer" type="VBoxContainer" parent="BoxContainer/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="Panel2" parent="BoxContainer/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("3_lufbr")]
-layout_mode = 2
-
-[node name="TextureButton" type="Button" parent="BoxContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+[node name="AddTaskButton" type="Button" parent="BoxContainer/ScrollContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 icon = ExtResource("4_itloi")
 icon_alignment = 1
+
+[connection signal="pressed" from="BoxContainer/ScrollContainer/MarginContainer/VBoxContainer/AddTaskButton" to="." method="_on_add_task_button_pressed"]

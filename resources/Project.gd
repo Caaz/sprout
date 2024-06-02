@@ -10,6 +10,7 @@ signal saved
 		document_tree.title = new_name
 
 @export var document_tree:Document = Document.new()
+@export var kanban:Kanban = Kanban.new()
 
 func has_unsaved_changes(document:Document = document_tree)-> bool:
 	if document.has_changes():
@@ -27,7 +28,8 @@ func clear_unsaved_changes(document:Document):
 func to_dict():
 	return {
 		"name": name,
-		"document_tree": document_tree.to_dict()
+		"document_tree": document_tree.to_dict(),
+		"kanban": kanban.to_dict(),
 	}
 
 func save(path:String):
@@ -40,6 +42,7 @@ func save(path:String):
 static func from_dict(dict:Dictionary):
 	var project = Project.new()
 	project.document_tree = Document.from_dict(dict["document_tree"])
+	project.kanban = Kanban.from_dict(dict.get("kanban"))
 	return project
 
 static func load(path:String) -> Project:

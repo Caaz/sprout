@@ -1,13 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://crb0djmbprxj0"]
+[gd_scene load_steps=12 format=3 uid="uid://crb0djmbprxj0"]
 
 [ext_resource type="Script" path="res://scenes/project_editor/project_editor.gd" id="1_fgrps"]
 [ext_resource type="Texture2D" uid="uid://dwy2ufq847nvh" path="res://addons/google_material/save_20dp_FILL0_wght400_GRAD0_opsz20.svg" id="2_0gqtb"]
 [ext_resource type="Texture2D" uid="uid://dy5m0uxihx66i" path="res://addons/google_material/note_add_20dp_FILL0_wght400_GRAD0_opsz20.svg" id="4_b78dl"]
+[ext_resource type="Texture2D" uid="uid://b4sglyq6dmrlg" path="res://addons/google_material/edit_note_20dp_FILL1_wght400_GRAD0_opsz20.svg" id="4_tnp1o"]
 [ext_resource type="Texture2D" uid="uid://bweohugs135we" path="res://addons/google_material/preview_20dp_FILL1_wght400_GRAD0_opsz20.svg" id="7_8qucw"]
 [ext_resource type="Script" path="res://scenes/document_editor/document_tree.gd" id="8_4umkm"]
+[ext_resource type="PackedScene" uid="uid://cfnsbl1hejnxa" path="res://scenes/kanban/kanban_control.tscn" id="8_dr6v5"]
 [ext_resource type="Texture2D" uid="uid://7xqpfnaqhbfs" path="res://addons/google_material/view_kanban_20dp_FILL0_wght400_GRAD0_opsz20.svg" id="8_ty8rn"]
 [ext_resource type="PackedScene" uid="uid://dry4sqxc5yx31" path="res://scenes/document_editor/document_editor.tscn" id="9_6m8co"]
-[ext_resource type="PackedScene" uid="uid://cfnsbl1hejnxa" path="res://scenes/kanban/kanban.tscn" id="12_jcnoi"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_5q50n"]
 device = -1
@@ -55,6 +56,13 @@ layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 3
 
+[node name="EditorToggle" type="Button" parent="MarginContainer/SideContainer/Toolbar"]
+layout_mode = 2
+tooltip_text = "Show Editor"
+toggle_mode = true
+button_pressed = true
+icon = ExtResource("4_tnp1o")
+
 [node name="PreviewToggle" type="Button" parent="MarginContainer/SideContainer/Toolbar"]
 layout_mode = 2
 tooltip_text = "Toggle Preview"
@@ -80,12 +88,13 @@ script = ExtResource("8_4umkm")
 visible = false
 layout_mode = 2
 
-[node name="Kanban" parent="." instance=ExtResource("12_jcnoi")]
+[node name="Kanban" parent="." instance=ExtResource("8_dr6v5")]
 visible = false
 layout_mode = 2
 
 [connection signal="pressed" from="MarginContainer/SideContainer/Toolbar/SaveButton" to="." method="save"]
 [connection signal="pressed" from="MarginContainer/SideContainer/Toolbar/AddDocumentButton" to="." method="_on_add_document_button_pressed"]
+[connection signal="toggled" from="MarginContainer/SideContainer/Toolbar/EditorToggle" to="." method="_on_editor_toggle_toggled"]
 [connection signal="toggled" from="MarginContainer/SideContainer/Toolbar/PreviewToggle" to="." method="_on_preview_toggle_toggled"]
 [connection signal="toggled" from="MarginContainer/SideContainer/Toolbar/KanbanToggle" to="." method="_on_kanban_toggle_toggled"]
 [connection signal="item_selected" from="MarginContainer/SideContainer/DocumentTree" to="." method="_set_editor_contents"]

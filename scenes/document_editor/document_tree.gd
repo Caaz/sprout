@@ -93,7 +93,7 @@ func _on_document_changed(document:Document):
 		
 	item.set_text(0, document.title)
 	if document.has_changes():
-		item.set_custom_color(0, Color.from_hsv(.01,.7,.54))
+		item.set_custom_color(0, Color.hex(0xDC4237FF))
 	else:
 		item.clear_custom_color(0)
 		

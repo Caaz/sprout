@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfnsbl1hejnxa"]
+
+[ext_resource type="Script" path="res://scenes/kanban/kanban_control.gd" id="1_ya27d"]
+[ext_resource type="Texture2D" uid="uid://bsrogavsdstck" path="res://addons/google_material/splitscreen_vertical_add_20dp_FILL0_wght400_GRAD0_opsz20.svg" id="3_4o32b"]
+
+[node name="KanbanControl" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ya27d")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_type_variation = &"PanelContainerDark"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Board" type="HBoxContainer" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AddColumnButton" type="Button" parent="PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+size_flags_stretch_ratio = 0.1
+icon = ExtResource("3_4o32b")
+icon_alignment = 1
+
+[connection signal="pressed" from="PanelContainer/HBoxContainer/AddColumnButton" to="." method="_on_add_column_button_pressed"]

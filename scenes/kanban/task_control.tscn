@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://cs217vo7ql7yw"]
+
+[ext_resource type="Script" path="res://scenes/kanban/task_control.gd" id="1_trea6"]
+[ext_resource type="Texture2D" uid="uid://d4hylt4t86ba4" path="res://addons/google_material/drag_handle_20dp_FILL1_wght400_GRAD0_opsz20.svg" id="2_ta018"]
+
+[node name="TaskControl" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Task"
+script = ExtResource("1_trea6")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_type_variation = &"Task"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_ta018")
+stretch_mode = 3
+
+[node name="Body" type="TextEdit" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Task"
+wrap_mode = 1
+scroll_fit_content_height = true
+
+[connection signal="text_changed" from="MarginContainer/HBoxContainer/Body" to="." method="_on_body_text_changed"]
